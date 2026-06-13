@@ -1,0 +1,32 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+class Solution:
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        q = deque()
+        q.append(root)
+        res = []
+        while q:
+            temp = []
+            for _ in range(len(q)):
+                curr = q.popleft()
+                if curr:
+                    temp.append(curr.val)
+                    q.append(curr.left)
+                    q.append(curr.right)
+
+            res.append(temp)
+
+        return res[:-1]
+
+    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+        lot = self.levelOrder(root)
+        res = []
+        for x in lot:
+            res.append(x[-1])
+
+        return res
